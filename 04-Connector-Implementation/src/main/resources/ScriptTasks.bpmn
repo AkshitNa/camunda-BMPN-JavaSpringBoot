@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1db6tv4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="MyScriptTask-01" name="Script-Task-Execution" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_17l4apj</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0xad148">
+      <bpmn:incoming>Flow_08gezyd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0umtu60" sourceRef="Activity_1lni09b" targetRef="Activity_0k0lg49" />
+    <bpmn:sequenceFlow id="Flow_17l4apj" sourceRef="StartEvent_1" targetRef="Activity_1lni09b" />
+    <bpmn:scriptTask id="Activity_1lni09b" name="Print Hello Camunda" scriptFormat="JavaScript">
+      <bpmn:incoming>Flow_17l4apj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0umtu60</bpmn:outgoing>
+      <bpmn:script>// Print that the BPMN JavaScript task has started
+print("Camunda BPMN Modeler is running: Hello Camunda 7");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_18h77ze" sourceRef="Activity_0k0lg49" targetRef="Activity_1rxizka" />
+    <bpmn:scriptTask id="Activity_0k0lg49" name="External JavaScript" scriptFormat="JavaScript" camunda:resource="TestJS.js">
+      <bpmn:incoming>Flow_0umtu60</bpmn:incoming>
+      <bpmn:outgoing>Flow_18h77ze</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1ljw816" sourceRef="Activity_1rxizka" targetRef="Activity_0wktqt9" />
+    <bpmn:serviceTask id="Activity_1rxizka" name="Connector HTTP GET">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://api.agify.io/?name=meelad</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:outputParameter name="responseGet">
+              <camunda:script scriptFormat="JavaScript">print("ResponseGET ::" + response)
+response;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18h77ze</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ljw816</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_08gezyd" sourceRef="Activity_0wktqt9" targetRef="Event_0xad148" />
+    <bpmn:serviceTask id="Activity_0wktqt9" name="Connector HTTP POST">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://api.restful-api.dev/objects</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">var obj = {
+   "name": "Apple MacBook Pro 16",
+   "data": {
+      "year": 2019,
+      "price": 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+   }
+}
+
+JSON.stringify(obj);</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:script scriptFormat="JavaScript">var header = {"Content-Type": "application/json"}
+header;</camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="responsePost">
+              <camunda:script scriptFormat="JavaScript">print("ResonsePOST :: " + response);
+response;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ljw816</bpmn:incoming>
+      <bpmn:outgoing>Flow_08gezyd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:textAnnotation id="TextAnnotation_0bpykfj">
+      <bpmn:text>Script Task</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0zyc7hj" associationDirection="None" sourceRef="Activity_1lni09b" targetRef="TextAnnotation_0bpykfj" />
+    <bpmn:textAnnotation id="TextAnnotation_0wjtv84">
+      <bpmn:text>External javaScript</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0gdca87" associationDirection="None" sourceRef="Activity_0k0lg49" targetRef="TextAnnotation_0wjtv84" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MyScriptTask-01">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1lxod5e_di" bpmnElement="Activity_1lni09b" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="210" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cfmxrl_di" bpmnElement="Activity_0k0lg49" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="330" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xx419m_di" bpmnElement="Activity_1rxizka" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="450" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xad148_di" bpmnElement="Event_0xad148">
+        <dc:Bounds x="722" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1crl7tz_di" bpmnElement="Activity_0wktqt9" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="580" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0zyc7hj_di" bpmnElement="Association_0zyc7hj">
+        <di:waypoint x="298" y="160" />
+        <di:waypoint x="346" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0gdca87_di" bpmnElement="Association_0gdca87">
+        <di:waypoint x="418" y="160" />
+        <di:waypoint x="455" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17l4apj_di" bpmnElement="Flow_17l4apj">
+        <di:waypoint x="188" y="200" />
+        <di:waypoint x="210" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0umtu60_di" bpmnElement="Flow_0umtu60">
+        <di:waypoint x="310" y="200" />
+        <di:waypoint x="330" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18h77ze_di" bpmnElement="Flow_18h77ze">
+        <di:waypoint x="430" y="200" />
+        <di:waypoint x="450" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ljw816_di" bpmnElement="Flow_1ljw816">
+        <di:waypoint x="500" y="160" />
+        <di:waypoint x="500" y="140" />
+        <di:waypoint x="630" y="140" />
+        <di:waypoint x="630" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08gezyd_di" bpmnElement="Flow_08gezyd">
+        <di:waypoint x="680" y="200" />
+        <di:waypoint x="722" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0bpykfj_di" bpmnElement="TextAnnotation_0bpykfj">
+        <dc:Bounds x="310" y="80" width="99.99999880417013" height="29.996082700532057" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0wjtv84_di" bpmnElement="TextAnnotation_0wjtv84">
+        <dc:Bounds x="430" y="80" width="99.99999880417013" height="40.75235109717868" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

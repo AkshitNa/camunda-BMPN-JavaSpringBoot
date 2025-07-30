@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0wxskba" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="SubProcess-Child" name="Call-Activity-SubProcess-Child" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0sykzg9</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0lcdm1c">
+      <bpmn:incoming>Flow_1iaa6lp</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1qy2rlv" sourceRef="Activity_19r9qka" targetRef="Activity_161am6q" />
+    <bpmn:sequenceFlow id="Flow_0sykzg9" sourceRef="StartEvent_1" targetRef="Activity_19r9qka" />
+    <bpmn:scriptTask id="Activity_19r9qka" name="Print Name" scriptFormat="JavaScript">
+      <bpmn:incoming>Flow_0sykzg9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qy2rlv</bpmn:outgoing>
+      <bpmn:script>print("Name: Akshit");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_161am6q" name="Print Email" scriptFormat="JavaScript">
+      <bpmn:incoming>Flow_1qy2rlv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1iaa6lp</bpmn:outgoing>
+      <bpmn:script>print("Email: abc@gmail.com")</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1iaa6lp" sourceRef="Activity_161am6q" targetRef="Event_0lcdm1c" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SubProcess-Child">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00iz3rt_di" bpmnElement="Activity_19r9qka" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="230" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lcdm1c_di" bpmnElement="Event_0lcdm1c">
+        <dc:Bounds x="542" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_174das9" bpmnElement="Activity_161am6q" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="380" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0sykzg9_di" bpmnElement="Flow_0sykzg9">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="230" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qy2rlv_di" bpmnElement="Flow_1qy2rlv">
+        <di:waypoint x="330" y="120" />
+        <di:waypoint x="380" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iaa6lp_di" bpmnElement="Flow_1iaa6lp">
+        <di:waypoint x="480" y="120" />
+        <di:waypoint x="542" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

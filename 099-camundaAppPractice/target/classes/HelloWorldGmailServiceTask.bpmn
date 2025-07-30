@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0pdmaqh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="HelloWorldGmailService" name="Hello-World-From-Gmail-Service" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0vm0qpi</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0vm0qpi" sourceRef="StartEvent_1" targetRef="Activity_1qabb0c" />
+    <bpmn:sequenceFlow id="Flow_1uqafvs" sourceRef="Activity_1qabb0c" targetRef="Activity_0ewrdz1" />
+    <bpmn:endEvent id="Event_0z1gqu8">
+      <bpmn:incoming>Flow_1cr8lam</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1x9dluk" sourceRef="Activity_0ewrdz1" targetRef="Activity_15wij38" />
+    <bpmn:scriptTask id="Activity_1qabb0c" name="Order" scriptFormat="JavaScript" camunda:resource="Order.js">
+      <bpmn:incoming>Flow_0vm0qpi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uqafvs</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_0ewrdz1" name="Payment" scriptFormat="JavaScript" camunda:resource="Payment.js">
+      <bpmn:incoming>Flow_1uqafvs</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x9dluk</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1cr8lam" sourceRef="Activity_15wij38" targetRef="Event_0z1gqu8" />
+    <bpmn:serviceTask id="Activity_15wij38" name="Confirm Email" camunda:expression="${helloSpring.HelloWorld.helloWorldTask()}">
+      <bpmn:incoming>Flow_1x9dluk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1cr8lam</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="HelloWorldGmailService">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0z1gqu8_di" bpmnElement="Event_0z1gqu8">
+        <dc:Bounds x="782" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ocgx06_di" bpmnElement="Activity_1qabb0c" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="280" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m9vyfi_di" bpmnElement="Activity_0ewrdz1" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="440" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05ra61x_di" bpmnElement="Activity_15wij38" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="610" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0vm0qpi_di" bpmnElement="Flow_0vm0qpi">
+        <di:waypoint x="228" y="120" />
+        <di:waypoint x="280" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uqafvs_di" bpmnElement="Flow_1uqafvs">
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="440" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x9dluk_di" bpmnElement="Flow_1x9dluk">
+        <di:waypoint x="540" y="120" />
+        <di:waypoint x="610" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cr8lam_di" bpmnElement="Flow_1cr8lam">
+        <di:waypoint x="710" y="120" />
+        <di:waypoint x="782" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

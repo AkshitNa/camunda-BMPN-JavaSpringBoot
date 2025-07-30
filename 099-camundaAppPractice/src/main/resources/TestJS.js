@@ -1,0 +1,1 @@
+print("This message is coming from external javaScript :: TestJS.js");

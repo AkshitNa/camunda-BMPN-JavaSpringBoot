@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0c33485" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="AkshitBPMN-ProcessID000" name="Akshit Sample BPMN" isExecutable="true">
+    <bpmn:startEvent id="AkshitBPMN-ProcessID001" name="Akshit Start Event">
+      <bpmn:outgoing>Flow_1o0fj6q</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="AkshitBPMN-ProcessID002" name="Hello 01">
+      <bpmn:incoming>Flow_1o0fj6q</bpmn:incoming>
+      <bpmn:outgoing>Flow_05mx8bh</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="AkshitBPMN-ProcessID003" name="Hello 02">
+      <bpmn:incoming>Flow_05mx8bh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qp5owh</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_05mx8bh" sourceRef="AkshitBPMN-ProcessID002" targetRef="AkshitBPMN-ProcessID003" />
+    <bpmn:endEvent id="AkshitBPMN-ProcessID004" name="Akshit End Event">
+      <bpmn:incoming>Flow_1qp5owh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1qp5owh" sourceRef="AkshitBPMN-ProcessID003" targetRef="AkshitBPMN-ProcessID004" />
+    <bpmn:sequenceFlow id="Flow_1o0fj6q" sourceRef="AkshitBPMN-ProcessID001" targetRef="AkshitBPMN-ProcessID002" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="AkshitBPMN-ProcessID000">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="AkshitBPMN-ProcessID001">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="128" y="145" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0aanqlc_di" bpmnElement="AkshitBPMN-ProcessID002" bioc:stroke="#5b176d" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#5b176d">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_10eja59_di" bpmnElement="AkshitBPMN-ProcessID003" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="390" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0h8f7zb_di" bpmnElement="AkshitBPMN-ProcessID004">
+        <dc:Bounds x="542" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="518" y="145" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1o0fj6q_di" bpmnElement="Flow_1o0fj6q">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="240" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05mx8bh_di" bpmnElement="Flow_05mx8bh">
+        <di:waypoint x="340" y="120" />
+        <di:waypoint x="390" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qp5owh_di" bpmnElement="Flow_1qp5owh">
+        <di:waypoint x="490" y="120" />
+        <di:waypoint x="542" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

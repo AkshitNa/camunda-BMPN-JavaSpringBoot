@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0v062g8" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ScriptTaskExecute" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1v4zorp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1v4zorp" sourceRef="StartEvent_1" targetRef="Activity_1cx4aja" />
+    <bpmn:endEvent id="Event_0rp3yr6">
+      <bpmn:incoming>Flow_0jft83t</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:scriptTask id="Activity_1cx4aja" name="Print JavaScript Object" scriptFormat="JavaScript" camunda:resultVariable="globalEmp">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="myAgeAfter5Years">
+            <camunda:script scriptFormat="JavaScript">var age = 356;
+
+age;</camunda:script>
+          </camunda:inputParameter>
+          <camunda:outputParameter name="hobby2">
+            <camunda:script scriptFormat="JavaScript">var hobby2 = "Teaching"
+
+hobby2;</camunda:script>
+          </camunda:outputParameter>
+          <camunda:outputParameter name="hobby1">
+            <camunda:script scriptFormat="JavaScript">var hobby1 = "Dancing"
+
+hobby1;</camunda:script>
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1v4zorp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g22bly</bpmn:outgoing>
+      <bpmn:script>var emp = {
+  name: "Akshit",
+  age: 20,
+};
+
+print("Value :: " + emp.age);
+
+execution.setVariable("health", "healthy");
+execution.setVariable("gender", "male");
+
+print(myAgeAfter5Years);
+
+emp;</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0g22bly" sourceRef="Activity_1cx4aja" targetRef="Activity_0qazvuz" />
+    <bpmn:scriptTask id="Activity_0qazvuz" name="Executing Sum" scriptFormat="javaScript" camunda:resource="JavaScriptExternalResourceFile.js">
+      <bpmn:incoming>Flow_0g22bly</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jft83t</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0jft83t" sourceRef="Activity_0qazvuz" targetRef="Event_0rp3yr6" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ScriptTaskExecute">
+      <bpmndi:BPMNEdge id="Flow_0jft83t_di" bpmnElement="Flow_0jft83t">
+        <di:waypoint x="580" y="124" />
+        <di:waypoint x="692" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g22bly_di" bpmnElement="Flow_0g22bly">
+        <di:waypoint x="390" y="124" />
+        <di:waypoint x="480" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1v4zorp_di" bpmnElement="Flow_1v4zorp">
+        <di:waypoint x="158" y="124" />
+        <di:waypoint x="290" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="122" y="106" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0rp3yr6_di" bpmnElement="Event_0rp3yr6">
+        <dc:Bounds x="692" y="106" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1m28t4x_di" bpmnElement="Activity_1cx4aja">
+        <dc:Bounds x="290" y="84" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pptgw3_di" bpmnElement="Activity_0qazvuz">
+        <dc:Bounds x="480" y="84" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
