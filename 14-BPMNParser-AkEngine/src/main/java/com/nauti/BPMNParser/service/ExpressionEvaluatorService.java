@@ -11,22 +11,34 @@ import java.util.Map;
 
 @Service
 public class ExpressionEvaluatorService {
+
     public boolean evaluateExpression(String expression, Map<String, Object> variables) {
         try {
-            ExpressionFactory factory = new ExpressionFactoryImpl();
-            ELContext context = new StandardELContext(factory);
+            //this engine can work on "${}" like expression
+            ExpressionFactory expressionFactoryEngine = new ExpressionFactoryImpl();
+            //creating a container which can hold the "${}" like expression
+            ELContext contextEnvironment = new StandardELContext(expressionFactoryEngine);
 
             if (variables != null) {
-                for (Map.Entry<String, Object> entry : variables.entrySet()) {
-                    ValueExpression valExpr = factory.createValueExpression(entry.getValue(), Object.class);
-                    context.getVariableMapper().setVariable(entry.getKey(), valExpr);
+                //Looping each "Variable"
+                for (Map.Entry<String, Object> jsonVariables : variables.entrySet()) {
+                    //Value Expression is a special format that my "Expression Engine" can understand
+                    ValueExpression valExpr = expressionFactoryEngine.createValueExpression(jsonVariables.getValue(), Object.class);
+                    //Assigning the respective values of "Variables".
+                    contextEnvironment.getVariableMapper().setVariable(jsonVariables.getKey(), valExpr);
                 }
             }
 
-            // Camunda Expression Syntax :: ${age > 12}
-            ValueExpression expr = factory.createValueExpression(context, "${" + expression + "}", Boolean.class);
-
-            Object result = expr.getValue(context);
+            // Camunda Expression Syntax Creation
+            /*
+            In JSON,
+            Expression: "age == 12 && height == 13"
+            variables: age = 10 and height = 15 //this will be stored in "CONTEXT ENVIRONMENT"
+            through "VALUE EXPRESSION"
+             */
+            ValueExpression mainExpression = expressionFactoryEngine.createValueExpression(contextEnvironment, "${" + expression + "}", Boolean.class);
+            //Executing my expression
+            Object result = mainExpression.getValue(contextEnvironment);
             return Boolean.TRUE.equals(result);
         } catch (Exception e) {
             System.out.println(e);

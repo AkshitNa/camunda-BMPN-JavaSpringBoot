@@ -15,7 +15,7 @@ public class ExpressionEvaluatorController {
 
     //http://localhost:8080/evaluate
     @PostMapping("/evaluate")
-    public boolean evaluate(@RequestBody ExpressionRequest request) {
-        return evaluatorService.evaluateExpression(request.getExpression(), request.getVariables());
+    public boolean evaluate(@RequestBody ExpressionRequest expRequest) {
+        return evaluatorService.evaluateExpression(expRequest.getExpression(), expRequest.getVariables());
     }
 }
