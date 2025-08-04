@@ -30,6 +30,8 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+        <!-- The given dependency includes "Tomcat Server".
+        Tomcat pulls in jakarta.el for handling JSP/Servlet Expression Language APIs-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
