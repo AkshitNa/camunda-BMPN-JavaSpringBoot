@@ -53,6 +53,23 @@
 			<version>1.18.38</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--		Camunda FEEL-->
+		<dependency>
+			<groupId>org.camunda.feel</groupId>
+			<artifactId>feel-engine</artifactId>
+			<version>1.19.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>5.18.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.5.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -72,6 +89,16 @@
 							<version>1.18.38</version>
 						</path>
 					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+						-Xshare:off
+					</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

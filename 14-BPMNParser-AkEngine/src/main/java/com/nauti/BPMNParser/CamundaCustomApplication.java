@@ -9,6 +9,8 @@ public class CamundaCustomApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CamundaCustomApplication.class, args);
 		System.out.println("BPMN Parser :: " +  "http://localhost:8080/bpmn/parse");
-		System.out.println("Expression Evaluator :: " + "http://localhost:8080/evaluate");
+		System.out.println("EL Expression Evaluator :: " + "http://localhost:8080/evaluate");
+		System.out.println("FEEL Expression Evaluator [Unary] :: " + "http://localhost:8080/feelEvaluateUnary");
+		System.out.println("FEEL Expression Evaluator [Normal] :: " + "http://localhost:8080/feelEvaluate");
 	}
 }

@@ -1,7 +1,6 @@
 package com.nauti.BPMNParser.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import java.util.Map;
 @Setter
 //Format of my JSON
 public class ExpressionRequest {
+    @NonNull
     private String expression;
     private Map<String, Object> variables;
     // Getters and setters
